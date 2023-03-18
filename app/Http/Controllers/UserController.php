@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers;
+use  App\Models\User;
+use App\Http\Resources\UserResource;
+use Illuminate\Http\Request;
 use App\Http\Resources\WriterResource;
 use App\Http\Controllers\csrf;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Http\Middleware;
-use App\Models\Writer;
-class WriterController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,8 @@ class WriterController extends Controller
      */
     public function index()
     {
-        $writers=Writer::all();
-        return WriterResource::collection($writers);
+        $users=User::all();
+        return UserResource::collection($users);
     }
 
     /**
@@ -25,23 +28,20 @@ class WriterController extends Controller
      */
     public function create()
     {
-        return "create";
+        //
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Writer $writer)
-    {  
-        
-        $writer = Writer::create($request->all());
-        return new writerResource($writer);
-        
-    }
+    public function store(Request $request,User $user)
+    {
+        $user = User::create($request->all());
+        return new UserResource($user); 
 
+       }
     /**
      * Display the specified resource.
      *
@@ -61,8 +61,7 @@ class WriterController extends Controller
      */
     public function edit($id)
     {
-        $writers=Writer::find($id);
-        dd($writers);
+        //
     }
 
     /**
@@ -74,13 +73,10 @@ class WriterController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-       
-        $writers=Writer::find($id);
-        $writers->update($request->all());
+        $users=User::find($id);
+        $users->update($request->all());
         
-        return new writerResource($writers);
-    }
+        return new UserResource($users);    }
 
     /**
      * Remove the specified resource from storage.
@@ -90,9 +86,8 @@ class WriterController extends Controller
      */
     public function destroy($id)
     {
-        $writers=Writer::find($id);
-        $writers->delete();
+        $users=User::find($id);
+        $users->delete();
         
-        return response(null, 204);
-    }
+        return response(null, 204);    }
 }
