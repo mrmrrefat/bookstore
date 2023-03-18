@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 // Route::resource('books' , App\Http\Controllers\BookController::class);
 Route::resource('books',\App\Http\Controllers\BookController::class);
+Route::resource('orders',App\Http\Controllers\OrderController::class);
 // Auth::routes();
 // Route::get('/token', function () {
 //     return csrf_token(); 
