@@ -19,4 +19,14 @@ Route::get('/', function () {
 
 
 
-Route::resource('books' , App\Http\Controllers\BookController::class);
+// Route::resource('books' , App\Http\Controllers\BookController::class);
+Route::resource('books',\App\Http\Controllers\BookController::class);
+// Auth::routes();
+// Route::get('/token', function () {
+//     return csrf_token(); 
+// });
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});

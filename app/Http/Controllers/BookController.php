@@ -38,27 +38,28 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Book $book)
     {
         //
         // dd($request->all()); هتعرض الداتا اللي راجعه من الفورم
-        dd(Auth::id());
-        $validated = $request->validate([
-            'name' => 'required|unique:tracks|max:3',
-            'description' => 'required',
-        ]);
-          $book=new Book();
-          $book->id=$request->id;
-          $book->name=$request->name;
-          $book->description=$request->description;
-          $book->price=$request->price;
-          $book->image=$request->image;
-        //   $book->created_at=$request->created_at;
-        //   $book->updated_at=$request->updated_at;
-          $book->save();
-        //   return redirect('/tracks');
-        return back()->with ('success_message','Book created successefully');
-
+        // dd(Auth::id());
+        // $validated = $request->validate([
+        //     'name' => 'required|unique:tracks|max:3',
+        //     'description' => 'required',
+        // ]);
+        //   $book=new Book();
+        //   $book->id=$request->id;
+        //   $book->name=$request->name;
+        //   $book->description=$request->description;
+        //   $book->price=$request->price;
+        //   $book->image=$request->image;
+        // //   $book->created_at=$request->created_at;
+        // //   $book->updated_at=$request->updated_at;
+        //   $book->save();
+        // //   return redirect('/tracks');
+        // return back()->with ('success_message','Book created successefully');
+        $book= Book::create($request->all());
+        return new BookResource($book);
     
     }
 

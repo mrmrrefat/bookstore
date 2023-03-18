@@ -25,6 +25,8 @@ class StoreBookRequest extends FormRequest
     {
         return [
             //
+            'name' => ['required', 'max:70'],
+            'description'  => ['required']
         ];
     }
 }
